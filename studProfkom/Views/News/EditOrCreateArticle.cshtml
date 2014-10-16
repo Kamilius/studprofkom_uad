@@ -1,0 +1,86 @@
+﻿@model studProfkom.Models.NewsArticleViewModel
+@{
+    ViewBag.Title = "Студпрофком УАД - Додати новину";
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+
+@using System.Web.Optimization
+
+@section CSSIncludes
+{
+    @Styles.Render("~/content/admin/css")
+}
+
+@section JSIncludes
+{
+    <script src="@Url.Content("~/Content/Scripts/tinymce/tinymce.min.js")"></script>
+    @Scripts.Render("~/content/admin/js")
+}
+
+<div class="add-article-wrapper">
+    <h3>Додати <span>новину</span> або <span>подію</span></h3>
+
+    @using (Html.BeginForm("Save", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { 
+        
+        @Html.HiddenFor(model => model.Id)
+        @Html.Hidden("returnUrl", (string)ViewBag.returnUrl)
+
+        @Html.ValidationSummary(false)
+
+        <fieldset>
+            <div class="editor-field">
+                <div class="editor-label">Назва: </div>
+                @Html.EditorFor(x => x.Title)
+            </div>
+            <div class="editor-field">
+                <div class="editor-label">Чи це подія? </div>
+                @Html.EditorFor(x=>x.IsEvent)
+            </div>
+            <div class="editor-field">
+                <div class="editor-label">Картинка: </div>
+                <input type="file" name="articleImage" id="articleImage"/>
+            </div>
+            @if (!String.IsNullOrEmpty(Model.ImageName))
+            {
+                <div class="editor-field image-select">
+                    <div class="editor-label">Поточна картинка: </div>
+                    <img src="@Url.Content("~/Content/Images/Articles/" + Model.ImageName)" alt="" class="article-image-preview"/>
+                </div>
+            }
+            <div class="editor-field">
+                <div class="editor-label">Короткий опис новини: </div>
+                @Html.EditorFor(model => model.ArticleShortDescription)
+            </div>
+            <div class="editor-field">
+                <div class="editor-label">Початок події: </div>
+                @Html.EditorFor(x=>x.EventStartDate)
+                @Html.EditorFor(x=>x.EventStartTime)
+            </div>
+            <div class="editor-field">
+                <div class="editor-label">Короткий опис події: </div>
+                @Html.EditorFor(model => model.EventShortDescription)
+            </div>
+            <div class="editor-field">         
+                <div class="editor-label google-pluss-album">Google+ ID користувача: </div>
+                @Html.EditorFor(model => model.GooglePlusUserId)
+            </div>
+           
+            <div class="editor-field">  
+                <div class="editor-label google-pluss-album">Google+ ID альбому: </div>
+                @Html.EditorFor(model => model.GooglePlusAlbumId)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Text, "Текст: ")
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Text, new { @class = "article-text" })
+            </div>
+            <div>
+                <button type="submit">Зберегти</button>
+                <a href="@Url.Action("CancelArticle", "Home")"><button>Відмінити</button></a>
+            </div>
+        </fieldset>
+    }
+</div>

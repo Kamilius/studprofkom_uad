@@ -1,0 +1,68 @@
+﻿@model List<studProfkom.Models.Application>
+@{
+  ViewBag.Title = "Студпрофком УАД - Заявки студентів на поселення у гуртожитки";
+  Layout = "~/Views/_mainLayout.cshtml";
+}
+
+<div class="chummery-applications-wrapper">
+  <h3>Заявки <span>студентів</span></h3>
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>
+          №
+        </th>
+        <th>
+          ПІБ
+        </th>
+        <th>
+          Місто
+        </th>
+        <th>
+          Факультет
+        </th>
+        <th>
+          Телефон
+        </th>
+        <th>
+          Дата подачі
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (Model.Count > 0)
+      {
+        foreach (var app in Model)
+        {
+          <tr>
+            <td>
+              @app.Id
+            </td>
+            <td title="@app.FullName">
+              @app.FullName
+            </td>
+            <td title="@app.City">
+              @app.City
+            </td>
+            <td title="@app.Faculty.Name">
+              @app.Faculty.Name
+            </td>
+            <td title="@app.Phone">
+              @app.Phone
+            </td>
+            <td title="@String.Format("{0:d/MM/yyyy  HH:mm:ss}", app.CreateDate)">
+              @String.Format("{0:d/MM/yyyy  HH:mm:ss}", app.CreateDate)
+            </td>
+          </tr>
+        }
+      }
+      else
+      {
+        <tr>
+          <td colspan="4">Наразі жодної заявки</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

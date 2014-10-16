@@ -1,0 +1,52 @@
+﻿@model List<studProfkom.Models.NewsArticleViewModel>
+@{
+    ViewBag.Title = "Студпрофком УАД - Події";
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+<div class="all-events-wrapper">
+    <h3>УСІ 
+        <span>ПОДІЇ</span>
+        @if (base.User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink(" ", "AddArticle", "Home", null, new { @class = "add-article-button" })
+        }
+    </h3>
+        @foreach (var a in Model)
+        {
+            if (a.IsEvent)
+            {
+                <article>
+                    <a href="@Url.Action("ArticleDetails", new { id = a.Id })" class="image-frame">
+                        @if (String.IsNullOrEmpty(a.ImageName))
+						{
+							<img src=""/>
+						}
+						else
+						{
+							<img src="@Url.Content("~/Content/Images/Articles/" + a.ImageName)" />
+						}
+                        <em></em>
+                    </a>
+                    <time class="date-label">початок <b>@a.FormattedDate("event")р.</b> о <b>@a.GetDateTime("event").ToString("HH:mm")</b></time>
+
+                    @if (base.User.Identity.IsAuthenticated)
+                    {
+                        <div class="functional-button-group">
+                            @Html.ActionLink(" ", "EditOrCreateArticle", "News", new { id = a.Id }, new { @class = "functional-article-button edit" })
+                            @Html.ActionLink(" ", "Remove", "News", new { id = a.Id }, new { @class = "functional-article-button delete" })
+                        </div>
+                    }
+
+                    <h4>
+                        @Html.ActionLink((string)a.Title, "ArticleDetails", new { id = a.Id })
+                    </h4>
+                    <div class="article-description">
+                        @a.ArticleShortDescription
+                    </div>
+                    @Html.ActionLink("Читати далі...", "ArticleDetails", new { id = a.Id }, new {@class = "read-more"})
+                </article>
+            }
+        }
+</div>
+

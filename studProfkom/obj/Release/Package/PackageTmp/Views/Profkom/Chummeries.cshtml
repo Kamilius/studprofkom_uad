@@ -1,0 +1,60 @@
+﻿@model List<studProfkom.Models.Application>
+@{
+    ViewBag.Title = "Студпрофком УАД - Гуртожитки";
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+<div class="chummeries-wrapper">
+    <h3>
+        Гуртожитки <span class="title-caption">що потрібно для успішного поселення</span>
+        @if (base.User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Заявки", "StudentsApplications", "Profkom", null, new { @class = "show-applications-link" })
+        }
+    </h3>
+    <div class="chummerie-guide-wrapper">
+      <h2>При поселенні в гуртожиток в наявності потрібно мати наступні документи:</h2>
+      <ol>
+        <li>Довідка від лікаря-дерматолога.</li>
+        <li>Паспорт з відміткою про зняття з реєстраційного обліку за попереднім місцем реєстрації, з двома листками вибуття.</li>
+        <li>Фото 3х4 (4 шт).</li>
+        <li>Квитанція про оплату за 2014/15 н/р (2100 грн/рік). Зразок квитанції завантажити <a href="@Url.Content("~/Content/Documents/Applications/зразок_квитанції_на_оплату.jpg")" target="_blank">тут</a>.</li>
+        <li>Взяти у своєму деканаті ордер на поселення.</li>
+        <li>Для військовозобов’язаних необхідно стати на військовий облік (вул. Підголоско, 19, 4 поверх).</li>
+        <li>Заповнити форму попередньої реєстрації під цим пунктом:</li>
+      </ol>
+    </div>
+
+    <div class="chummerie-application-wrapper">
+      <form class="form">
+        <div class="form-group">
+          <label for="full-name">ПІБ: </label>
+          <input type="text" class="form-control" id="full-name" name="full-name"/>
+        </div>
+        <div class="form-group">
+          <label for="city">Вкажіть звідки ви: </label>
+          <input type="text" class="form-control" id="city" name="city"/>
+        </div>
+        <div class="form-group">
+          <label for="faculty">Назва факультету: </label>
+          @Html.DropDownList("Faculties", new SelectList(ViewBag.Faculties, "Id", "Name"), new { @class = "form-control", id = "faculty", name = "faculty" })
+        </div>
+        <div class="form-group">
+          <label for="phone">Номер телефону: </label>
+          <input type="text" class="form-control" id="phone" name="phone"/>
+        </div>
+        <button class="btn btn-success" type="submit">Надіслати</button>
+        <button class="btn btn-default" type="reset">Очистити</button>
+        <div class="submition-indicator"></div>
+      </form>
+    </div>
+    
+    <p>Поселення відбуватиметься по факультетах:</p>
+    <ul>
+      <li>ЕОКС – 28-29 серпня (гуртожиток №1, вул. Підголоско, 23)</li>
+      <li>ВПІТ – 26-27 серпня (гуртожиток №1, вул. Підголоско, 23)</li>
+      <li>КПІ – 28-29 серпня (гуртожиток №3, вул. Підголоско, 20)</li>
+    </ul>
+    <p>За детальною інформацією звертайтесь до комісії з поселення: м. Львів, вул. Підголоско, 19, к.311, тел. 242-23-98, +38067-67-25-979.</p>
+</div>
+

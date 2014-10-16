@@ -1,0 +1,17 @@
+/* Mixins available:
+   -   border-radius           - arguments: Radius: 5px
+   -   border-radius-separate  - arguments: Top Left: 5px, Top Left: 5px, Bottom Left: 5px, Bottom Right: 5px
+*/
+/* BORDER RADIUS */
+@mixin border-radius($radius: 5px) 
+{
+    @include prefixer(border-radius, $radius, webkit moz spec);
+}
+
+@mixin border-radius-separate($topLeftRadius: 5px, $topRightRadius: 5px, $bottomRightRadius: 5px, $bottomLeftRadius: 5px) 
+{
+    @include prefixer(border-top-left-radius, $topLeftRadius, webkit moz spec);
+    @include prefixer(border-top-right-radius, $topRightRadius, webkit moz spec);
+    @include prefixer(border-bottom-right-radius, $bottomRightRadius, webkit moz spec);
+    @include prefixer(border-bottom-left-radius, $bottomLeftRadius, webkit moz spec);
+}

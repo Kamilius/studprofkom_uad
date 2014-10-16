@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="www.studprofkom-uad.lviv.ua" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\GitHub\\Studprofkom\\studProfkom\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\GitHub\\Studprofkom\\studProfkom\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="StudProfkomUADConnectionString-Web.config Connection String" description="" value="Data Source=194.28.87.175\MSSQLSERVER2008;Initial Catalog=StudProfkomUAD;User ID=studprofkom_admin;Password=ksksfyf250888;Persist Security Info=true;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\GitHub\\Studprofkom\\studProfkom\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='StudProfkomUADConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

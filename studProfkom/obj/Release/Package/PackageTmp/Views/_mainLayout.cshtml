@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>@ViewBag.Title</title>
+  <meta charset="windows-1351"/>
+  <meta name=viewport content="width=1024, initial-scale=0">
+  <meta name="google-site-verification" content="4QWy8ctb94ROeUCWc2lb8VJMFHLPl5JckFXM-afXMc0" />
+  <meta name="keywords" content="Профком УАД, Профком, УАД, Профком студентів УАД" />
+  <link rel="shortcut icon" href="@Url.Content("~/Content/Images/favicon.ico")" >
+  @if (ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString() == "Profkom")
+  {
+    @Styles.Render("~/content/bootstrap")
+  }
+  else
+  {
+    @Styles.Render("~/content/css")
+  }
+  @RenderSection("CSSIncludes", false)
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <a class="header-logo" href="@Url.Action("Index", "Home")">
+        <img src="~/Content/Images/profkom-logo.jpg" />
+      </a>
+      <div class="header-logo-caption"></div>
+
+      @if (!base.User.Identity.IsAuthenticated)
+      {
+        @Html.ActionLink("Увійти в систему", "Login", "Account", null, new { @class = "login-btn" })
+      }
+      else
+      {
+        <div class="login-btn">Ви увійшли, як <b>@base.User.Identity.Name</b>. @Html.ActionLink("Вийти", "LogOff", "Account")</div>
+      }
+    </header>
+    <div class="white-container">
+      <nav>
+        <ul class="top-nav-menu">
+          <li class="first">
+            @Html.ActionLink("ГОЛОВНА", "Index", "Home")
+          </li>
+          <li class="sub-menu-holder">
+            @Html.ActionLink("ПРОФКОМ", "Guidance", "Profkom")
+            <ul class="top-nav-sub-menu first-level">
+              @*<li>
+                <a href="" class="sub-menu-holder">Студенту</a>
+                <span class="sub-menu-arrow"></span>
+                <ul class="top-nav-sub-menu second-level">
+                  <li></li>
+                  <li><a href="">One</a></li>
+                  <li><a href="">One</a></li>
+                  <li><a href="">One</a></li>
+                  <li><a href="">One</a></li>
+                </ul>
+              </li>*@
+              <li>@Html.ActionLink("Студентам", "Students", "Profkom")</li>
+              <li>@Html.ActionLink("Сиротам", "Orphans", "Profkom")</li>
+              <li>@Html.ActionLink("Гуртожитки", "Chummeries", "Profkom")</li>
+              <li>@Html.ActionLink("Керівництво", "Guidance", "Profkom")</li>
+              <li>@Html.ActionLink("Голови профбюро", "Profbureau", "Profkom")</li>
+              <li class="last">@Html.ActionLink("Про нас", "About", "Profkom")</li>
+            </ul>
+          </li>
+          <li class="sub-menu-holder">
+            @Html.ActionLink("ПРОЕКТИ", "MissUad", "Projects")
+            <ul class="top-nav-sub-menu first-level">
+              <li>@Html.ActionLink("Міс УАД", "MissUad", "Projects")</li>
+              <li>@Html.ActionLink("Вечірки", "Parties", "Projects")</li>
+              <li>@Html.ActionLink("Спортивні досягнення", "SportEvents", "Projects")</li>
+              <li>@Html.ActionLink("Подорожуємо разом", "TravelWithUs", "Projects")</li>
+              <li>@Html.ActionLink("Літнє оздоровлення", "SummerRecovery", "Projects")</li>
+              <li>@Html.ActionLink("Студентський театр", "StudentTheater", "Projects")</li>
+              <li>@Html.ActionLink("Фестивалі студентської творчості", "StudentArt", "Projects")</li>
+              <li>@Html.ActionLink("Великодні акції", "EasterAction", "Projects")</li>
+              <li>@Html.ActionLink("До дня української мови та писемності", "UkrainianWritingDay", "Projects")</li>
+              <li>@Html.ActionLink("Турнір зі SCRABBLE", "ScrabbleTourney", "Projects")</li>
+              <li>@Html.ActionLink("УАД ТВ - Студентське телебачення", "UadTv", "Projects")</li>
+              <li>@Html.ActionLink("Караоке в поліграфі", "Karaoke", "Projects")</li>
+              <li class="last">@Html.ActionLink("Благочинність", "Charity", "Projects")</li>
+            </ul>
+          </li>
+          <li>
+            @Html.ActionLink("ГАЛЕРЕЯ", "Gallery", "Home")
+          </li>
+          <li>
+            @Html.ActionLink("ГАЗЕТА", "Archive", "PidholoskoMagazine")
+          </li>
+          <li>
+            @Html.ActionLink("КОНТАКТИ", "Contacts", "Home")
+          </li>
+        </ul>
+      </nav>
+      <div class="panes-wrapper">
+        <div class="left-pane">
+          @RenderBody()
+        </div>
+        <div class="right-pane">
+
+          @{Html.RenderAction("EventsWidget", "Home");}
+
+          <div class="partner-links">
+            <h3>НАШІ ГРУПИ У <span>VK.COM</span></h3>
+            <a href="http://vk.com/uadtv">
+              <img src="@Url.Content("~/Content/Images/uad-tv-logo.jpg")" />
+            </a>
+            <a href="http://vk.com/studprofkomuad">
+              <img src="@Url.Content("~/Content/Images/profkom-vk-logo.jpg")" />
+            </a>
+            <a href="http://vk.com/uadlviv">
+              <img src="@Url.Content("~/Content/Images/uad-vk-logo.jpg")" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <ul class="footer-menu">
+          <li class="first">@Html.ActionLink("ГОЛОВНА", "Index", "Home")</li>
+          <li>@Html.ActionLink("ПРОФКОМ", "Guidance", "Profkom")</li>
+          <li>@Html.ActionLink("ПРОЕКТИ", "MissUad", "Projects")</li>
+          <li>@Html.ActionLink("ГАЛЕРЕЯ", "Gallery", "Home")</li>
+          <li>@Html.ActionLink("ГАЗЕТА", "Archive", "PidholoskoMagazine")</li>
+          <li>@Html.ActionLink("КОНТАКТИ", "Contacts", "Home")</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  @using System.Web.Optimization
+  @using StackExchange.Profiling
+
+  @Scripts.Render("~/content/js")
+  <a href="https://plus.google.com/113056928089793738016" rel="publisher">Google+</a>
+
+  @RenderSection("JSIncludes", false)
+  @MiniProfiler.RenderIncludes()
+</body>
+</html>

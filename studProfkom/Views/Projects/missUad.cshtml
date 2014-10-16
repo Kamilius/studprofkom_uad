@@ -1,0 +1,28 @@
+﻿@model List<studProfkom.Models.MissUad>
+@{
+    ViewBag.Title = "Студпрофком УАД - Міс Українська Академія Друкарства";
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+<div class="miss-uad-wrapper">
+    <img class="project-logo" src="@Url.Content("~/Content/Images/Projects/miss-uad-logo.jpg")" />
+    <p>
+        Щорічно в Українській академії друкарства проходить свято молодості та краси «Міс УАД», організаторами якого є ректорат 
+        та профком студентів. Цей захід є доброю традицією і демонструє високий рівень естетичного, культурного та інтелектуального 
+        розвитку прекрасної половини студентства академії. Вперше цей конкурс провели у 2001 році.
+    </p>
+    <h3>Найчарівніші дівчата нашої академії за час існування конкурсу:</h3>
+    <ul class="miss-list">
+        @foreach (var m in Model)
+        {
+            <li class="miss-item">@m.MissListItem()</li>
+        }
+    </ul>
+    <hr />
+    <div id="plusgallery"
+        data-type="google"
+        data-userid="116877431537615488956"
+        data-album-id="5888150960502214017"
+        data-credit="false">
+    </div>
+</div>

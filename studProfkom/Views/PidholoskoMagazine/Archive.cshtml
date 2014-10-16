@@ -1,0 +1,31 @@
+﻿@model List<studProfkom.Models.pidholoskoMagazineIssue>
+@{
+    ViewBag.Title = "Студпрофком УАД - Архів випусків журналу \"Підголоско'76\"";
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+<div class="magazine-archive-wrapper">
+    <h3>Архів 
+        <span>випусків</span>
+        @if (base.User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink(" ", "AddIssue", "PidholoskoMagazine", null, new { @class = "add-article-button" })
+        }
+    </h3>
+    @foreach (var m in Model)
+    {
+        <div class="issue-item">
+            <a class="issue-cover-wrapper" href="@m.fileUrl">
+                <img src="@m.fileUrl.Substring(0, (m.fileUrl.Length - 3))jpg" alt="" />
+                <em></em>
+            </a>
+            <div class="issue-caption">
+                <div class="issue-number">Випуск #@m.formattedNumber()</div>
+                <div class="issue-publish-date">@m.formattedDate()</div>
+            </div>
+            <div class="issue-button-group">
+                <a class="issue-download" href="@m.fileUrl" title="Скачати випуск"></a>
+            </div>
+        </div> 
+    }
+</div>

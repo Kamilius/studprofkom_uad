@@ -1,0 +1,75 @@
+﻿@model studProfkom.Models.NewsArticleViewModel
+@{
+    ViewBag.Title = "Студпрофком УАД - " + Model.Title;
+    Layout = "~/Views/_mainLayout.cshtml";
+}
+
+@section JSIncludes
+{
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?97"></script>
+    <script type="text/javascript">
+        //VK comments
+        VK.init({ apiId: 3749120, onlyWidgets: true });
+
+        VK.Widgets.Comments("vk_comments", { limit: 10, width: "620", attach: false });
+    </script>
+}
+
+<div class="article-details-wrapper">
+    <h3>
+        @Model.Title
+        @{
+            if (Model.IsEvent)
+            {
+                <span class="title-caption">подія</span> 
+            }
+            else
+            {
+                <span class="title-caption">новина</span> 
+            }
+        }
+    </h3>
+    @if (base.User.Identity.IsAuthenticated)
+    {
+        <div class="functional-button-group">
+            @Html.ActionLink(" ", "EditOrCreateArticle", "News", new { id = Model.Id }, new { @class = "functional-article-button edit" })
+            @Html.ActionLink(" ", "Remove", "News", new { id = Model.Id }, new { @class = "functional-article-button delete" })
+        </div>
+    }
+    <article>
+        <div class="image-frame">
+            @if (String.IsNullOrEmpty(Model.ImageName))
+			{
+				<img src=""/>
+			}
+			else
+			{
+				<img src="@Url.Content("~/Content/Images/Articles/" + Model.ImageName)" />
+			}
+		</div>
+            @{
+                if (Model.IsEvent)
+                {
+                    <time class="date-label">початок <b>@Model.FormattedDate("event")р.</b> о <b>@Model.GetDateTime("event").ToString("HH:mm")</b></time>
+                }
+                else
+                { 
+                    <time class="date-label"><b>@Model.FormattedDate("publication")р.</b></time>
+                }                
+            }
+        <div class="article-description">
+            @Model.ArticleShortDescription
+        </div>
+        <div>@Html.Raw(Model.Text)</div>
+    </article>
+    @if (Model.GooglePlusAlbumId != null && Model.GooglePlusUserId != null)
+    {
+        <div id="plusgallery"
+            data-type="google"
+            data-userid="@Model.GooglePlusUserId"
+            data-album-id="@Model.GooglePlusAlbumId"
+            data-credit="false">
+        </div>
+    }
+    <div id="vk_comments"></div>
+</div>

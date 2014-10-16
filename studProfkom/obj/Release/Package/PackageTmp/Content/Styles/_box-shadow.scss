@@ -1,0 +1,23 @@
+/* BOX SHADOW */
+@mixin box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4), $inset: "") 
+{
+
+	@if $inset == ""
+	{
+		@include prefixer(box-shadow, $x $y $blur $color, webkit moz spec);
+	}
+	@else
+	{
+		@include prefixer(box-shadow, $inset $x $y $blur $color, webkit moz spec);
+	}
+}
+
+/* @include box-shadow(2px, 2px, 5px, #FFFFFF); */
+/* @include box-shadow(2px, 2px, 5px, #FFFFFF, inset); */
+
+@mixin box-shadow-none()
+{
+	@include prefixer(box-shadow, none, webkit moz spec);
+}
+
+/* @include box-shadow-none(); */

@@ -1,0 +1,30 @@
+﻿@model List<studProfkom.Models.EventWidgetViewModel>
+
+<div class="close-events">
+	<h2>НАЙБЛИЖЧІ ПОДІЇ</h2>
+	
+	@if (Model.Count > 0)
+	{
+		foreach (var widget in Model)
+		{
+			<div class="event">
+				<a href="@Url.Action("ArticleDetails", "Home", new { widget.Id })" class="event-icon-link">
+					<img class="event-icon" src="@Url.Content("~/Content/Images/Articles/" + widget.ImageName)" />
+					<em></em>
+				</a>
+				<time class="date-label">@widget.Date</time>
+				<a href="@Url.Action("ArticleDetails", "Home", new { widget.Id })" class="event-tite">@widget.Title</a>
+				<div class="event-short-description">@widget.Description</div>
+			</div>
+		}
+	}
+	else
+	{
+	<div class="event">
+		<div class="event-title">
+			Наразі - жодних подій.
+		</div>
+	</div> 
+	}
+	@Html.ActionLink("Показати усі події", "Events", "Home", null, new { @class = "show-all-news"})
+</div>
