@@ -1,3 +1,11 @@
 packages/**
+studProfkom/Content/themes/**
+studProfkom/Content/tinymce/**
+studProfkom/Content/jquery**
+studProfkom/Content/knockout**
+studProfkom/Content/picker.date.js
+studProfkom/Content/picker.js
+studProfkom/Content/picker.time.js
+studProfkom/Content/plusgallery.js
 studProfkom/Scripts/**
 studProfkom/obj/**
